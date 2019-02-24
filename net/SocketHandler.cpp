@@ -18,13 +18,7 @@ SocketHandler::~SocketHandler()
 
 }
 
-void SocketHandler::SendMessage(const std::string& str)
-{
-	m_write_buffer.SendMsg(str);
-}
-
-
-int32_t SocketHandler::ReadScoket(std::vector<std::string>& msg_list)
+int32_t SocketHandler::ReadScoket()
 {
 	int32_t status = ReadSuccess;
 	int32_t read_size = m_read_buffer.ReadFd(m_socket);
@@ -44,10 +38,6 @@ int32_t SocketHandler::ReadScoket(std::vector<std::string>& msg_list)
 		{
 			LOG_DEBUG("Read Socket Unknow Error err[%d]", errno);
 		}
-	}
-	if (status == ReadSuccess || status == ReadContinue)
-	{
-		m_read_buffer.ReadMsg(msg_list);
 	}
 	return status;
 

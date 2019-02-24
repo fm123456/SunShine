@@ -9,7 +9,7 @@
 
 
 ListenSocket::ListenSocket(int32_t fd, EventLoop* loop)
-	:BaseChannel(fd, loop)
+	:AcceptChannel(fd, loop)
 {
 
 }
@@ -19,20 +19,16 @@ ListenSocket::~ListenSocket()
 
 }
 
-void ListenSocket::OnRead()
+void ListenSocket::OnAcceptSuccess(int32_t conn_fd, const std::string& conn_addr, int32_t conn_port)
 {
-	int32_t conn_fd;
-	std::string user_addr;
-	int32_t user_port;
-
-	if (!SocketUtil::Accept(GetFd(), conn_fd, user_addr, user_port))
-	{
-		LOG_ERROR("ListenSocket::OnRead Accept Failed err[%d]", errno);
-		return;
-	}
 	Util::MakeNonBlock(conn_fd);
-
-	LOG_INFO("ListenSocket::OnRead NewConnection addr:%s port:%d", user_addr.c_str(), user_port);
-	UserConnection* conn(new UserConnection(conn_fd, GetEventLoop(), user_addr, user_port));
+	UserConnection* conn(new UserConnection(conn_fd, GetEventLoop(), conn_addr, conn_port));
 	ConnectManager::instance().InsertUserConnection(conn_fd, conn);
+
+	LOG_INFO("ListenSocket::OnAcceptSuccess addr:%s port:%d", conn_addr.c_str(), conn_port);
+}
+
+void ListenSocket::OnAcceptFailed()
+{
+	LOG_ERROR("ListenSocket::OnAcceptFailed fd:%d", GetFd());
 }

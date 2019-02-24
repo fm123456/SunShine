@@ -1,8 +1,11 @@
 #include <iostream>
 
 #include "StdCout.h"
+#include "ClientConnection.h"
+#include "ClientManager.h"
 
 #include "common/Log.h"
+#include "net/Command.h"
 
 StdCout::StdCout(EventLoop* loop)
 	:BaseChannel(2, loop)
@@ -15,14 +18,45 @@ StdCout::~StdCout()
 
 }
 
-void StdCout::OnRead()
+void StdCout::OnChat(int32_t cmd)
 {
-	LOG_INFO("StdCout::OnRead");
+	DisableRead();
+
+	std::string msg;
+
+	std::cout << "input send msg:";
+	std::cin >> msg;
+
+	ClientHeader header;
+	header.m_cmd = cmd;
+	header.m_len = msg.length();
+
+	ClientManager::instance().GetClientConn()->SendMsg<ClientHeader>(header);
+	ClientManager::instance().GetClientConn()->SendMsg(msg);
+
+	LOG_INFO("StdCout::OnChat cmd:%d send_msg:%s", cmd, msg.c_str());
+
+	EnableRead();
 }
 
-void StdCout::OnWrite()
+void StdCout::OnRead()
 {
 	LOG_INFO("StdCout::OnWrite");
+
+	char buff[4096] = {0};
+	int32_t read_size = ::read(2,buff,4096) - 1;
+	//LOG_PRINT("StdCout ReadHandler msg:%s read_size:%d",buff, read_size);
+	m_cmd = atoi(buff);
+	LOG_INFO("input cmd: %d", m_cmd);
+	switch (m_cmd)
+	{
+	case CHAT_CMD:
+		OnChat(m_cmd);
+		break;
+	default:
+		LOG_INFO("invalid cmd cmd:%d", m_cmd);
+		break;
+	}
 }
 
 //StdCout::StdCout(ClientConnection* client, EventLoop* loop)

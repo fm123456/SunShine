@@ -3,18 +3,20 @@
 
 #include <string>
 
-#include "net/BaseChannel.h"
+#include "net/TcpChannel.h"
+#include "net/ProtocolHeader.h"
 
-class UserConnection : public BaseChannel
+
+class UserConnection : public TcpChannel<ClientHeader>
 {
 public:
 	UserConnection(int32_t fd, EventLoop* loop, const std::string& addr, int32_t port);
 	~UserConnection();
 
 private:
-	virtual void OnRead() override;
-	virtual void OnWrite() override;
+	virtual void DoSocketClose() override;
 
+	virtual void OnMessageArrived(const ClientHeader& header, const std::string& msg) override;
 private:
 	std::string m_addr;
 	int32_t m_port;

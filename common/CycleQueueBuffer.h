@@ -30,34 +30,62 @@ public:
 		}
 	}
 
-	void SendMsg(const std::string& msg)
+	void Append(const std::string& msg)
 	{
 		if (msg.empty())
 			return;
-		uint32_t len = msg.length();
-		Append((char*)&len, sizeof(uint32_t));
 		Append(msg.c_str(), msg.length());
 	}
 
-	void ReadMsg(std::vector<std::string>& msglist)
+	template<class T>
+	void Append(T& val)
 	{
-		do 
+		Append((char*)&val, sizeof(T));
+	}
+
+	void Append(const char* src, size_t len)
+	{
+		if (len == 0) return;
+		if (len > GetUnusedSize())
 		{
-			uint32_t len = 0;
-			if (!ReadBuffer(m_head,(char*)&len, sizeof(uint32_t)))
-				break;
-			std::string msg;
-			msg.resize(len,0);
-			if (!ReadBuffer(GetIndex(m_head+sizeof(len)),&msg[0],len))
-				break;
-			msglist.push_back(msg);
-			m_head = GetIndex(m_head + sizeof(len) + len);
-		} while (!IsEmpty());
+			DoAllocator(Size() + (len - GetUnusedSize()));
+		}
+		if (m_head > m_tail)
+		{
+			memcpy(&m_buffer[m_tail], &src[0], len);
+			m_tail += len;
+		}
+		else
+		{
+			size_t tail = GetIndex(m_tail + len);
+			if (tail > m_tail)
+			{
+				memcpy(&m_buffer[m_tail], &src[0], len);
+			}
+			else
+			{
+				memcpy(&m_buffer[m_tail], &src[0], len - tail);
+				memcpy(&m_buffer[0], &src[len - tail], tail);
+			}
+			m_tail = tail;
+		}
+	}
+
+	template<class T>
+	bool ReadMsg(T& header, std::string& msg)
+	{
+		if (!ReadBuffer(m_head, (char*)&header, sizeof(T)))
+			return false;
+		msg.resize(header.m_len, 0);
+		if (!ReadBuffer(GetIndex(m_head + sizeof(T)), &msg[0], header.m_len))
+			return false;
+		m_head = GetIndex(m_head + sizeof(T) + header.m_len);
 		if (IsEmpty())
 		{
 			m_head = 0;
 			m_tail = 0;
 		}
+		return true;
 	}
 
 	int32_t ReadFd(int32_t fd)
@@ -192,34 +220,6 @@ private:
 			}
 		}
 		return true;
-	}
-
-	void Append(const char* src, size_t len)
-	{
-		if (len == 0) return;
-		if (len > GetUnusedSize())
-		{
-			DoAllocator(Size() + (len - GetUnusedSize()));
-		}
-		if (m_head > m_tail)
-		{
-			memcpy(&m_buffer[m_tail],&src[0],len);
-			m_tail += len;
-		}
-		else
-		{
-			size_t tail = GetIndex(m_tail + len);
-			if (tail > m_tail)
-			{
-				memcpy(&m_buffer[m_tail],&src[0],len);
-			}
-			else
-			{
-				memcpy(&m_buffer[m_tail],&src[0],len - tail);
-				memcpy(&m_buffer[0],&src[len - tail],tail);
-			}
-			m_tail = tail;
-		}
 	}
 
 	size_t GetIndex(size_t new_index)

@@ -4,18 +4,20 @@
 #include <string>
 #include <stdint.h>
 
-#include "net/BaseChannel.h"
+#include "net/TcpChannel.h"
+#include "net/ProtocolHeader.h"
 
 
-class ClientConnection : public BaseChannel
+class ClientConnection : public TcpChannel<ClientHeader>
 {
 public:
 	ClientConnection(int32_t client_fd, EventLoop* loop);
 	~ClientConnection();
 
 private:
-	virtual void OnRead() override;
-	virtual void OnWrite() override;
+	virtual void DoSocketClose() override;
+
+	virtual void OnMessageArrived(const ClientHeader& header, const std::string& msg) override;
 };
 
 #endif

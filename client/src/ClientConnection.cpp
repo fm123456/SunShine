@@ -6,7 +6,7 @@
 #include "common/Log.h"
 
 ClientConnection::ClientConnection(int32_t client_fd, EventLoop* loop)
-	:BaseChannel(client_fd, loop)
+	:TcpChannel<ClientHeader>(client_fd, loop)
 {
 
 }
@@ -16,14 +16,14 @@ ClientConnection::~ClientConnection()
 
 }
 
-void ClientConnection::OnRead()
+void ClientConnection::DoSocketClose()
 {
-	LOG_INFO("ClientConnection::OnRead");
+	LOG_INFO("ClientConnection::DoSocketClose");
 }
 
-void ClientConnection::OnWrite()
+void ClientConnection::OnMessageArrived(const ClientHeader& header, const std::string& msg)
 {
-	LOG_INFO("ClientConnection::OnWrite");
+	LOG_INFO("ClientConnection::DoSocketClose cmd[%d] msg[%s]", header.m_cmd, msg.c_str());
 }
 
 //ClientConnection::ClientConnection(EventLoop* loop)

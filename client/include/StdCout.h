@@ -18,7 +18,10 @@ public:
 
 private:
 	virtual void OnRead() override;
-	virtual void OnWrite() override;
+
+private:
+	void OnChat(int32_t cmd);
+
 private:
 
 	int32_t m_cmd;
