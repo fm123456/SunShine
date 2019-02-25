@@ -35,7 +35,7 @@ void ClientConnection::DoSocketClose()
 
 void ClientConnection::OnMessageArrived(const ClientHeader& header, const std::string& msg)
 {
-	LOG_INFO("ClientConnection::DoSocketClose cmd[%d] msg[%s]", header.m_cmd, msg.c_str());
+	LOG_INFO("ClientConnection::OnMessageArrived cmd[%d] msg[%s]", header.m_cmd, msg.c_str());
 }
 
 //ClientConnection::ClientConnection(EventLoop* loop)
