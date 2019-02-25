@@ -16,6 +16,18 @@ ClientConnection::~ClientConnection()
 
 }
 
+void ClientConnection::SendServerMsg(int32_t cmd, const std::string& msg)
+{
+	ClientHeader header;
+	header.m_cmd = cmd;
+	header.m_len = msg.length();
+
+	SendMsg((char*)&header, sizeof(ClientHeader));
+	SendMsg(msg);
+
+	LOG_INFO("ClientConnection::SendServerMsg cmd:%d size:%d send_msg:%s", header.m_cmd, header.m_len, msg.c_str());
+}
+
 void ClientConnection::DoSocketClose()
 {
 	LOG_INFO("ClientConnection::DoSocketClose");

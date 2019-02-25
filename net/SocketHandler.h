@@ -37,12 +37,6 @@ public:
 		m_write_buffer.Append(msg);
 	}
 
-	template<class T>
-	void Append(T& val)
-	{
-		m_write_buffer.Append<T>(val);
-	}
-
 	void Append(const char* src, size_t len)
 	{
 		m_write_buffer.Append(src, len);
@@ -54,8 +48,7 @@ public:
 		return m_read_buffer.ReadMsg<T>(header, msg);
 	}
 
-	size_t GetWirteBufferSize() { return m_write_buffer.Size(); }
-	size_t GetReadBufferSize() { return m_read_buffer.Size(); }
+	size_t GetWriteBufferUsedSize() { return m_write_buffer.GetUsedSize(); }
 private:
 	int32_t m_socket;
 

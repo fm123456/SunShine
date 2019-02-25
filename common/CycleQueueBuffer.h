@@ -34,13 +34,7 @@ public:
 	{
 		if (msg.empty())
 			return;
-		Append(msg.c_str(), msg.length());
-	}
-
-	template<class T>
-	void Append(T& val)
-	{
-		Append((char*)&val, sizeof(T));
+		Append(&msg[0], msg.length());
 	}
 
 	void Append(const char* src, size_t len)

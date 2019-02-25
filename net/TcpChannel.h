@@ -23,32 +23,18 @@ public:
 	{
 		SAFE_DELETE(m_socket_handler);
 	}
-
+	
 	void SendMsg(const std::string& msg)
 	{
-		CheckEnableWrite();
+		
+		EnableWrite();
 		m_socket_handler->Append(msg);
-	}
-	
-	template<class T>
-	void SendMsg(T& val)
-	{
-		CheckEnableWrite();
-		m_socket_handler->Append<T>(val);
 	}
 
 	void SendMsg(const char* src, size_t len)
 	{
-		CheckEnableWrite();
-		m_socket_handler->Append(src, len);
-	}
-
-private:
-	void CheckEnableWrite()
-	{
-		if (m_socket_handler->GetWirteBufferSize() > 0)
-			return;
 		EnableWrite();
+		m_socket_handler->Append(src, len);
 	}
 
 private:
@@ -84,7 +70,7 @@ private:
 			OnClose();
 			return;
 		}
-		if (m_socket_handler->GetWirteBufferSize() == 0)
+		if (m_socket_handler->GetWriteBufferUsedSize() == 0)
 		{
 			DisableWrite();
 		}

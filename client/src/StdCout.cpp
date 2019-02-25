@@ -20,28 +20,17 @@ StdCout::~StdCout()
 
 void StdCout::OnChat(int32_t cmd)
 {
-	DisableRead();
-
 	std::string msg;
 
 	std::cout << "input send msg:";
 	std::cin >> msg;
 
-	ClientHeader header;
-	header.m_cmd = cmd;
-	header.m_len = msg.length();
-
-	ClientManager::instance().GetClientConn()->SendMsg<ClientHeader>(header);
-	ClientManager::instance().GetClientConn()->SendMsg(msg);
-
-	LOG_INFO("StdCout::OnChat cmd:%d send_msg:%s", cmd, msg.c_str());
-
-	EnableRead();
+	ClientManager::instance().GetClientConn()->SendServerMsg(cmd, msg);
 }
 
 void StdCout::OnRead()
 {
-	LOG_INFO("StdCout::OnWrite");
+	LOG_INFO("StdCout::OnRead");
 
 	char buff[4096] = {0};
 	int32_t read_size = ::read(2,buff,4096) - 1;

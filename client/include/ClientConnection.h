@@ -14,6 +14,7 @@ public:
 	ClientConnection(int32_t client_fd, EventLoop* loop);
 	~ClientConnection();
 
+	void SendServerMsg(int32_t cmd, const std::string& msg);
 private:
 	virtual void DoSocketClose() override;
 
