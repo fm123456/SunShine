@@ -7,7 +7,8 @@
 #include "common/Singleton.h"
 
 class EventLoop;
-class ListenSocket;
+class UserAcceptor;
+class ServerAcceptor;
 class GatewayServer : public Singleton<GatewayServer>
 {
 public:
@@ -19,7 +20,8 @@ public:
 
 private:
 	EventLoop* m_loop = NULL;
-	ListenSocket* m_client_socket = NULL;
+	UserAcceptor* m_user_acceptor = NULL;
+	ServerAcceptor* m_server_acceptor = NULL;
 };
 
 #endif
