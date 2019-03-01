@@ -31,6 +31,6 @@ int main(int argc, char** argv)
 		LOG_FATAL("TcpConnect failed");
 		return 0;
 	}
-	GatewayConnection conn(gateway_fd, &ev);
+	GatewayConnection conn(gateway_fd, &ev, type);
 	ev.Loop();
 } 

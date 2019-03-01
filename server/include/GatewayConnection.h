@@ -21,7 +21,7 @@ private:
 	virtual void OnMessageArrived(const ServerHeader& header, const std::string& msg) override;
 
 private:
-	void RegisterServer(int32_t type)
+	void RegisterServer(int32_t type);
 };
 
 #endif
