@@ -14,8 +14,10 @@ struct ClientHeader
 */
 struct ServerHeader
 {
-	int32_t m_server_type;
-	int32_t m_process_id;
+	int32_t m_src_server_type;
+	int32_t m_src_process_id;
+	int32_t m_target_server_type;
+	int32_t m_target_process_id;
 	int32_t m_cmd;
 	int32_t m_len;
 };

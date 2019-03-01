@@ -9,15 +9,16 @@
 
 int main(int argc, char** argv)
 {
-	if (argc < 3)
+	if (argc < 4)
 	{
 		LOG_FATAL("paramter is less");
 		return 0;
 	}
 	std::string addr = argv[1];
 	int32_t port = atoi(argv[2]);
+	int32_t type = atoi(argv[3]);
 
-	LOG_INFO("server addr:%s  port: %d", addr.c_str(), port);
+	LOG_INFO("server addr:%s  port: %d type:%d", addr.c_str(), port, type);
 	EventLoop ev;
 	if (!ev.Init())
 	{
