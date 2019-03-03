@@ -24,6 +24,11 @@ int32_t Service::ServiceType()
 	return g_service_type;
 }
 
+void Service::SendMessage(int32_t type, int32_t process_id, int32_t cmd, const std::string& msg)
+{
+
+}
+
 void Service::Start(IProcessFactoryPtr process_factory, int32_t service_type)
 {
 	g_service_type = service_type;

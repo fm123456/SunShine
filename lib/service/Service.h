@@ -13,6 +13,8 @@ public:
 
 	int32_t ServiceType();
 
+	void SendMessage(int32_t type, int32_t process_id, int32_t cmd, const std::string& msg);
+
 	void Start(IProcessFactoryPtr process_factory, int32_t service_type);
 
 	void Loop();
