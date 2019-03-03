@@ -11,17 +11,17 @@
 class GatewayConnection : public TcpChannel<ServerHeader>
 {
 public:
-	GatewayConnection(int32_t gateway_fd, EventLoop* loop, int32_t type);
+	GatewayConnection(int32_t gateway_fd, EventLoop* loop, const std::string& gateway_addr, int32_t gateway_port);
 	~GatewayConnection();
 
-	void SendServerMsg(int32_t server_type, int32_t process_id, int32_t cmd, const std::string& msg);
 private:
 	virtual void DoSocketClose() override;
-
+	 
 	virtual void OnMessageArrived(const ServerHeader& header, const std::string& msg) override;
 
 private:
-	void RegisterServer(int32_t type);
+	std::string m_gateway_addr;
+	int32_t m_gateway_port;
 };
 
 #endif

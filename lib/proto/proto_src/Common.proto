@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+package SSProto; 
+
+//注册服务类型
+message RegisterServer
+{
+	int32 type = 1;
+}

@@ -16,11 +16,13 @@ public:
 
 	void Update(EpollData* epoll_data);
 
+	void Exist();
 private:
 	void UpdateEvent(int32_t event_type, EpollData* epoll_data);
 
 private:
 	int32_t m_epoll_fd;
+	bool m_is_exist = false;
 };
 
 #endif

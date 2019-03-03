@@ -73,6 +73,8 @@ void EpollData::Remove()
 {
 	if (m_cur_status == DELETING_STATUS)
 		return;
+	m_write_callback = NULL;
+	m_read_callback = NULL;
 	m_cur_status = DELETING_STATUS;
 	Update();
 	LOG_DEBUG("Remove EpollData fd: %d",m_fd);

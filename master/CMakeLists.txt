@@ -1,0 +1,6 @@
+AUX_SOURCE_DIRECTORY(./src DIR_SRCS)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -g -std=c++17")
+INCLUDE_DIRECTORIES(./include ${SunShine_SOURCE_DIR}/lib)
+LINK_DIRECTORIES(${SunShine_BINARY_DIR}/lib)
+ADD_EXECUTABLE(Master ${DIR_SRCS})
+TARGET_LINK_LIBRARIES(Master pthread protobuf libcommon.a libnet.a)

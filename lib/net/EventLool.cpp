@@ -37,7 +37,7 @@ void EventLoop::Loop()
 {
 	struct epoll_event evs[MAX_EPOLL_FD];
 
-	while(true)
+	while(!m_is_exist)
 	{
 		int32_t num = ::epoll_wait(m_epoll_fd, evs, MAX_EPOLL_FD, -1);
 		for (int32_t i = 0; i < num; i++)
@@ -46,6 +46,12 @@ void EventLoop::Loop()
 			epoll_data->HandleEvent(evs[i].events);
 		}
 	}
+	LOG_INFO("EventLoop break");
+}
+
+void EventLoop::Exist()
+{
+	m_is_exist = true;
 }
 
 void EventLoop::Update(EpollData* epoll_data)

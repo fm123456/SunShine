@@ -5,8 +5,8 @@
 */
 struct ClientHeader
 {
-	int32_t m_cmd;
-	int32_t m_len;
+	int32_t m_cmd = 0;
+	int32_t m_len = 0;
 };
 
 
@@ -14,12 +14,21 @@ struct ClientHeader
 */
 struct ServerHeader
 {
-	int32_t m_src_server_type;
-	int32_t m_src_process_id;
-	int32_t m_target_server_type;
-	int32_t m_target_process_id;
-	int32_t m_cmd;
-	int32_t m_len;
+	int32_t m_src_server_type = 0;
+	int32_t m_src_process_id = 0;
+	int32_t m_target_server_type = 0;
+	int32_t m_target_process_id = 0;
+	int32_t m_cmd = 0;
+	int32_t m_len = 0;
+};
+
+
+/* Master协议包头
+*/
+struct MasterHeader
+{
+	int32_t m_cmd = 0;
+	int32_t m_len = 0;
 };
 
 #endif
