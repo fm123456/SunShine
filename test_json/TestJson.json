@@ -1,0 +1,11 @@
+{
+    "EntryTask": {
+        "Type": "BehaviorDesigner.Runtime.Tasks.EntryTask",
+        "NodeData": {
+                "Offset": "(-733.085938,-6041.043)"
+        },
+        "ID": 0,
+        "Name": "Entry",
+        "Instant": true
+    }
+}
