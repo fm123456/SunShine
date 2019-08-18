@@ -52,6 +52,8 @@ struct MyStruct
 
 int main()
 {
+	MyStruct a;
+	
 	pid_t pid = getpid();
 	char strProcessPath[1024] = { 0 };
 	if (::readlink("/proc/self/exe", strProcessPath, 1024) <= 0)
@@ -63,16 +65,16 @@ int main()
 
 	if (!strProcessName)
 	{
-		printf("id£º%d\n", pid);
-		printf("name£º\n");
-		printf("path£º%s\n", strProcessPath);
+		printf("idï¿½ï¿½%d\n", pid);
+		printf("nameï¿½ï¿½\n");
+		printf("pathï¿½ï¿½%s\n", strProcessPath);
 	}
 	else
 	{
 		std::string name = std::string(++strProcessName);
-		printf("id£º%d\n", pid);
-		printf("name£º%s\n", name.c_str());
-		printf("path£º%s\n", strProcessPath);
+		printf("idï¿½ï¿½%d\n", pid);
+		printf("nameï¿½ï¿½%s\n", name.c_str());
+		printf("pathï¿½ï¿½%s\n", strProcessPath);
 	}
 
 	return 0;

@@ -1,0 +1,205 @@
+﻿E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 main.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 client\src\main.cpp, data_server\src\main.cpp, gateway\src\main.cpp, master\src\main.cpp, scene_server\src\main.cpp, server\src\main.cpp, test\main.cpp, test_json\main.cpp, test_server\src\main.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 DateTime.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 common\DateTime.cpp, lib\common\DateTime.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 FileSystem.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 common\FileSystem.cpp, lib\common\FileSystem.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 Log.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 common\Log.cpp, lib\common\Log.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 StringUtil.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 common\StringUtil.cpp, lib\common\StringUtil.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 ConnectManager.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 gateway\src\ConnectManager.cpp, test_server\src\ConnectManager.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 GatewayServer.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 gateway\src\GatewayServer.cpp, test_server\src\GatewayServer.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 ServerAcceptor.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 gateway\src\ServerAcceptor.cpp, test_server\src\ServerAcceptor.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 ServerConnection.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 gateway\src\ServerConnection.cpp, test_server\src\ServerConnection.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 UserAcceptor.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 gateway\src\UserAcceptor.cpp, test_server\src\UserAcceptor.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 UserConnection.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 gateway\src\UserConnection.cpp, test_server\src\UserConnection.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 AcceptChannel.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\AcceptChannel.cpp, net\AcceptChannel.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 BaseChannel.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\BaseChannel.cpp, net\BaseChannel.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 EpollData.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\EpollData.cpp, net\EpollData.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 EventLool.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\EventLool.cpp, net\EventLool.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 SocketHandler.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\SocketHandler.cpp, net\SocketHandler.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 SocketUtil.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\SocketUtil.cpp, net\SocketUtil.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 TcpChannel.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\TcpChannel.cpp, net\TcpChannel.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 TimerEvent.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\TimerEvent.cpp, net\TimerEvent.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 Util.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\net\Util.cpp, net\Util.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 GatewayConnection.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\service\GatewayConnection.cpp, server\src\GatewayConnection.cpp。
+E:\develop_software\vs2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(944,5): warning MSB8027: 名为 MasterConnection.cpp 的两个或更多文件将生成到同一位置的输出。这会导致错误的生成结果。   调用的文件是 lib\service\MasterConnection.cpp, master\src\MasterConnection.cpp。
+  ClientConnection.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  main.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  StdCout.cpp
+f:\linuxdepend\iostream(36): warning C4068: 未知的杂注
+f:\linuxdepend\iostream(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  DateTime.cpp
+c1xx : fatal error C1083: 无法打开源文件: “common\DateTime.cpp”: No such file or directory
+  FileSystem.cpp
+c1xx : fatal error C1083: 无法打开源文件: “common\FileSystem.cpp”: No such file or directory
+  Log.cpp
+c1xx : fatal error C1083: 无法打开源文件: “common\Log.cpp”: No such file or directory
+  StringUtil.cpp
+c1xx : fatal error C1083: 无法打开源文件: “common\StringUtil.cpp”: No such file or directory
+  DataService.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  main.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  ConnectManager.cpp
+f:\linuxdepend\map(58): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_tree.h(61): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_algobase.h(59): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  GatewayServer.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ListenSocket.cpp
+c1xx : fatal error C1083: 无法打开源文件: “gateway\src\ListenSocket.cpp”: No such file or directory
+  main.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ServerAcceptor.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ServerConnection.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  UserAcceptor.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  UserConnection.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  DateTime.cpp
+f:\linuxdepend\chrono(32): warning C4068: 未知的杂注
+f:\linuxdepend\bits\c++0x_warning.h(34): fatal error C1189: #error:  This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+  FileSystem.cpp
+f:\linuxdepend\filesystem(32): warning C4068: 未知的杂注
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  Log.cpp
+f:\linuxdepend\atomic(35): warning C4068: 未知的杂注
+f:\linuxdepend\bits\c++0x_warning.h(34): fatal error C1189: #error:  This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+  正在生成代码...
+  正在编译...
+  StringUtil.cpp
+f:\linuxdepend\regex(32): warning C4068: 未知的杂注
+f:\linuxdepend\bits\c++0x_warning.h(34): fatal error C1189: #error:  This file requires compiler and library support for the ISO C++ 2011 standard. This support must be enabled with the -std=c++11 or -std=gnu++11 compiler options.
+  json_reader.cpp
+f:\linuxdepend\cstddef(42): warning C4068: 未知的杂注
+f:\linuxdepend\cstddef(49): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  json_value.cpp
+f:\linuxdepend\cstdlib(39): warning C4068: 未知的杂注
+f:\linuxdepend\cstdlib(41): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  json_writer.cpp
+f:\linuxdepend\cstddef(42): warning C4068: 未知的杂注
+f:\linuxdepend\cstddef(49): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  AcceptChannel.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  BaseChannel.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  EpollData.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  EventLool.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  SocketHandler.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  SocketUtil.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  TcpChannel.cpp
+  TimerEvent.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  Util.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  Common.pb.cc
+f:\linuxdepend\limits(40): warning C4068: 未知的杂注
+f:\linuxdepend\limits(42): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  GatewayConnection.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  MasterConnection.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ProcessManager.cpp
+f:\linuxdepend\map(58): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_tree.h(61): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_algobase.h(59): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ProcessMessage.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  Service.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  ServiceConnectManager.cpp
+f:\linuxdepend\map(58): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_tree.h(61): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_algobase.h(59): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  正在生成代码...
+  正在编译...
+  main.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  MasterAcceptor.cpp
+f:\linux_share\sunshine\master\src\masteracceptor.cpp(1): fatal error C1083: 无法打开包括文件: “MasterAcceptor.h”: No such file or directory
+  MasterConnection.cpp
+f:\linux_share\sunshine\master\src\masterconnection.cpp(1): fatal error C1083: 无法打开包括文件: “MasterConnection.h”: No such file or directory
+  AcceptChannel.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\AcceptChannel.cpp”: No such file or directory
+  BaseChannel.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\BaseChannel.cpp”: No such file or directory
+  EpollData.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\EpollData.cpp”: No such file or directory
+  EventLool.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\EventLool.cpp”: No such file or directory
+  SocketHandler.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\SocketHandler.cpp”: No such file or directory
+  SocketUtil.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\SocketUtil.cpp”: No such file or directory
+  TcpChannel.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\TcpChannel.cpp”: No such file or directory
+  TimerEvent.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\TimerEvent.cpp”: No such file or directory
+  Util.cpp
+c1xx : fatal error C1083: 无法打开源文件: “net\Util.cpp”: No such file or directory
+  main.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  SceneService.cpp
+f:\linuxdepend\gnu\stubs.h(7): fatal error C1083: 无法打开包括文件: “gnu/stubs-32.h”: No such file or directory
+  GatewayConnection.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\GatewayConnection.cpp”: No such file or directory
+  KbrokerConnection.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\KbrokerConnection.cpp”: No such file or directory
+  main.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\main.cpp”: No such file or directory
+  MainProcessThread.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\MainProcessThread.cpp”: No such file or directory
+  Server.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\Server.cpp”: No such file or directory
+  ServerProxy.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\ServerProxy.cpp”: No such file or directory
+  正在生成代码...
+  正在编译...
+  TimerManager.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\TimerManager.cpp”: No such file or directory
+  WakeupMainProcess.cpp
+c1xx : fatal error C1083: 无法打开源文件: “server\src\WakeupMainProcess.cpp”: No such file or directory
+  main.cpp
+f:\linuxdepend\iostream(36): warning C4068: 未知的杂注
+f:\linuxdepend\iostream(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  main.cpp
+f:\linuxdepend\iostream(36): warning C4068: 未知的杂注
+f:\linuxdepend\iostream(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ConnectManager.cpp
+f:\linuxdepend\map(58): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_tree.h(61): warning C4068: 未知的杂注
+f:\linuxdepend\bits\stl_algobase.h(59): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  GatewayServer.cpp
+c1xx : fatal error C1083: 无法打开源文件: “test_server\src\GatewayServer.cpp”: No such file or directory
+  main.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  ServerAcceptor.cpp
+c1xx : fatal error C1083: 无法打开源文件: “test_server\src\ServerAcceptor.cpp”: No such file or directory
+  ServerConnection.cpp
+c1xx : fatal error C1083: 无法打开源文件: “test_server\src\ServerConnection.cpp”: No such file or directory
+  TestServer.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  UserAcceptor.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  UserConnection.cpp
+f:\linuxdepend\string(36): warning C4068: 未知的杂注
+f:\linuxdepend\string(38): fatal error C1083: 无法打开包括文件: “bits/c++config.h”: No such file or directory
+  正在生成代码...

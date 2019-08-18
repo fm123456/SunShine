@@ -8,26 +8,28 @@
 #include <cmath>
 #include <vector>
 
+#include "Util.h"
+
+#define IS_POWER_OF_2(x) (!((x)&((x)-1)))
+
 #define M1 1048576 //1024*1204
 
+//size must be the pow of 2
+template<size_t sz = M1>
 class CycleQueueBuffer
 {
 public:
-	const static uint32_t INIT_SIZE = 4096;
 	CycleQueueBuffer()
-		:m_buffer(NULL),m_size(0),m_head(0),m_tail(0)
+		:m_buffer(NULL),m_size(sz),m_head(0),m_tail(0)
 	{
-		DoAllocator(INIT_SIZE);
-		m_head = 15;
-		m_tail = 15;
+		m_head = 0;
+		m_tail = 0;
+
+        m_buffer = new char[sz];
 	}
 	~CycleQueueBuffer()
 	{
-		if(m_buffer)
-		{
-			delete[] m_buffer;
-			m_buffer = NULL;
-		}
+        SAFE_DELETE_ARRAY(m_buffer);
 	}
 
 	void Append(const std::string& msg)
@@ -40,9 +42,10 @@ public:
 	void Append(const char* src, size_t len)
 	{
 		if (len == 0) return;
-		if (len > GetUnusedSize())
+		if (len > GetFreeSize())
 		{
-			DoAllocator(Size() + (len - GetUnusedSize()));
+            //have no enough room
+            return;
 		}
 		if (m_head > m_tail)
 		{
@@ -65,52 +68,59 @@ public:
 		}
 	}
 
-	template<class T>
-	bool ReadMsg(T& header, std::string& msg)
+	template<class HEADER>
+	bool ReadMsg(HEADER& header, char** src1, size_t& size1, char** src2, size_t& size2)
 	{
-		if (!ReadBuffer(m_head, (char*)&header, sizeof(T)))
+		if (!ReadBuffer<HEADER>(header))
 			return false;
-		msg.resize(header.m_len, 0);
-		if (!ReadBuffer(GetIndex(m_head + sizeof(T)), &msg[0], header.m_len))
-			return false;
-		m_head = GetIndex(m_head + sizeof(T) + header.m_len);
-		if (IsEmpty())
-		{
-			m_head = 0;
-			m_tail = 0;
-		}
-		return true;
+        if (header.m_len + sizeof(HEADER) > GetOccupySize())
+            return false;
+
+        size_t tmp_header = GetIndex(m_head + sizeof(header));
+        if (m_size - tmp_header >= header.m_len)
+        {
+            *src1 = (m_buffer + tmp_header);
+            size1 = header.m_len;
+            *src2 = NULL;
+            size2 = 0;
+        }
+        else
+        {
+            *src1 = (m_buffer + tmp_header);
+            size1 = m_size - tmp_header;
+            *src2 = m_buffer;
+            size2 = header.m_len - (m_size - tmp_header);
+        }
+        return true;
 	}
+
+    //head往前移动sz个单位
+    void FetchSize(size_t size)
+    {
+        if (size > GetOccupySize())
+            return;
+        m_head = GetIndex(m_head + size);
+    }
 
 	int32_t ReadFd(int32_t fd)
 	{
-		const static uint32_t EXTRA_BUFFER_SIZE = 65536;
-		char extrabuf[EXTRA_BUFFER_SIZE];
-
 		int32_t total_size = 0;
 		while(1)
 		{
-			uint32_t unused_size = GetUnusedSize();
+			size_t unused_size = GetFreeSize();
 			int32_t read_size = 0;
 			if (m_tail < m_head ||  m_head==0)
 			{
-				struct iovec vec[2];
-				vec[0].iov_base = &m_buffer[m_tail];
-				vec[0].iov_len = unused_size;
-				vec[1].iov_base = extrabuf;
-				vec[1].iov_len = EXTRA_BUFFER_SIZE;
-				read_size = ::readv(fd, vec, 2);
+                read_size = ::read(fd, &m_buffer[m_tail], unused_size);
 			}
 			else
 			{
 				struct iovec vec[3];
 				vec[0].iov_base = &m_buffer[m_tail];
-				vec[0].iov_len = Size()+1-m_tail;
+				vec[0].iov_len = unused_size - (m_head - 1);
 				vec[1].iov_base = &m_buffer[0];
-				vec[1].iov_len = unused_size - (Size()+1-m_tail);
-				vec[2].iov_base = extrabuf;
-				vec[2].iov_len = EXTRA_BUFFER_SIZE;
-				read_size = ::readv(fd, vec, 3);
+				vec[1].iov_len = m_head - 1;
+				read_size = ::readv(fd, vec, 2);
 			}
 			if (read_size <= 0)
 			{
@@ -118,18 +128,10 @@ public:
 			}
 			//update tail
 			total_size += read_size;
-			uint32_t unsigned_read_size = static_cast<uint32_t>(read_size);
-			m_tail = (unsigned_read_size<=unused_size?GetIndex(m_tail + unsigned_read_size):GetIndex(m_tail + unused_size));
+            m_tail = GetIndex(m_tail + static_cast<uint32_t>(read_size));
+            if (IsFull())
+                continue;
 
-			if (unsigned_read_size > unused_size)
-			{
-				Append(extrabuf, unsigned_read_size - unused_size);
-				if (unsigned_read_size == unused_size + EXTRA_BUFFER_SIZE)
-				{
-					//contiune to read
-					continue;
-				}
-			}
 			break;
 		}
 		return total_size;
@@ -163,15 +165,15 @@ public:
 		return write_size;
 	}
 
-	size_t GetUnusedSize()
-	{
-		return Size() - GetUsedSize();
+	size_t GetFreeSize()
+	{ 
+        return m_tail >= m_head ? (Size() - (m_tail - m_head + 1)) : (m_head - m_tail - 1);
 	}
 
-	size_t GetUsedSize()
-	{
-		return m_head <= m_tail?(m_tail - m_head):(Size()-(m_head - m_tail-1));
-	}
+    size_t GetOccupySize()
+    {
+        return m_size - (GetFreeSize() + 1);
+    }
 
 	size_t Size()
 	{
@@ -189,59 +191,53 @@ public:
 	}
 
 private:
-	bool ReadBuffer(size_t begin, char* dest, size_t len)
+    template<class T>
+	bool ReadBuffer(T& t)
 	{
-		if (m_tail >= begin)
-		{
-			if (m_tail - begin < len)
-				return false;
-			memcpy(dest, &m_buffer[begin], len);
-		}
-		else
-		{
-			size_t used_size = Size() - (begin - m_tail - 1);
-			if (used_size < len)
-				return false;
-			size_t to_last_size = Size() + 1 - begin;
-			if (to_last_size < len)
-			{
-				memcpy(dest, &m_buffer[begin], to_last_size);
-				memcpy(dest + to_last_size, &m_buffer[0],len - to_last_size);
-			}
-			else
-			{
-				memcpy(dest, &m_buffer[begin], len);
-			}
-		}
+        size_t occSize = GetOccupySize();
+        if (GetOccupySize() < sizeof(T))
+            return false;
+
+        char* dest = (char*)&t;
+        if (m_size - m_head >= sizeof(T))
+        {
+            memcpy(dest, m_buffer + m_head, sizeof(T));
+        }
+        else
+        {
+            memcpy(dest, m_buffer + m_head, m_size - m_head);
+            memcpy(dest + m_size - m_head, m_buffer, sizeof(T) - (m_size - m_head));
+        }
 		return true;
 	}
 
 	size_t GetIndex(size_t new_index)
 	{
-		return new_index % (Size()+1);
+        return new_index & (m_size - 1);
 	}
 
+    //自动扩容机制
 	void DoAllocator(size_t new_size)
 	{
 		if (Size() >= new_size)
 			return;
-		new_size = CeilToPow2(new_size);
-		char* ptr = new char[new_size + 1];
+		new_size = FixSize(new_size);
+		char* ptr = new char[new_size];
 		if (!IsEmpty())
 		{
-			size_t used_size = GetUsedSize();
 			if(m_tail > m_head)
 			{
-				memcpy(&ptr[0], &m_buffer[m_head], used_size);
+
+				memcpy(ptr, m_buffer + m_head, m_tail - m_head);
+                m_tail = m_tail - m_head;
 			}
 			else
 			{
-				size_t to_last_size = used_size - m_tail;
-				memcpy(&ptr[0],&m_buffer[m_head], to_last_size);
-				memcpy(&ptr[to_last_size], &m_buffer[0],m_tail);
+				memcpy(ptr, m_buffer + m_head, m_size - m_head);
+				memcpy(ptr + m_size - m_head, m_buffer, m_tail);
+                m_tail = m_size - m_head + m_tail;
 			}
 			m_head = 0;
-			m_tail = used_size;
 		}
 		else
 		{
@@ -249,32 +245,21 @@ private:
 			m_tail = 0;
 		}
 		m_size = new_size;
-		if(m_buffer)
-		{
-			delete[] m_buffer;
-			m_buffer = NULL;
-		}
+        SAFE_DELETE_ARRAY(m_buffer);
 		m_buffer = ptr;
 	}
 
-	static size_t CeilToPow2(size_t x)
-	{
-		--x;
-		x |= x >> 1;
-		x |= x >> 2;
-		x |= x >> 4;
-		for (size_t i = 1; i < sizeof(size_t); i <<= 1) {
-			x |= x >> (i << 3);
-		}
-		++x;
-		if (x > M1)
-		{
-			//大于1M时，扩大成能容纳的最大M空间即可
-			x = std::ceil((x*1.0) / M1) * M1;
-		}
+    static size_t FixSize(size_t size) {
+        if (IS_POWER_OF_2(size))
+            return size;
 
-		return x;
-	}
+        size |= size >> 1;
+        size |= size >> 2;
+        size |= size >> 4;
+        size |= size >> 8;
+        size |= size >> 16;
+        return size + 1;
+    }
 
 private:
 	char* m_buffer;

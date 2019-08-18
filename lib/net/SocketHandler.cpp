@@ -40,7 +40,6 @@ int32_t SocketHandler::ReadScoket()
 		}
 	}
 	return status;
-
 }
 
 int32_t SocketHandler::WriteSocket()

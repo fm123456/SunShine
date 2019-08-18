@@ -26,7 +26,6 @@ public:
 	
 	void SendMsg(const std::string& msg)
 	{
-		
 		EnableWrite();
 		m_socket_handler->Append(msg);
 	}
@@ -47,19 +46,28 @@ private:
 private:
 	virtual void OnRead() override
 	{
-		int32_t status = m_socket_handler->ReadScoket();
-		if (status == ReadFailed)
-		{
-			OnClose();
-			return;
-		}
-		HEADER header;
-		std::string msg;
-		while (m_socket_handler->ReadMsg<HEADER>(header, msg))
-		{
-			OnMessageArrived(header, msg);
-			msg.clear();
-		}
+        LOG_INFO("TcpChannel OnRead");
+
+        int32_t status = ReadSuccess;
+        do 
+        {
+		    status = m_socket_handler->ReadScoket();
+		    if (status == ReadFailed)
+		    {
+			    OnClose();
+			    break;
+		    }
+		    HEADER header;
+            char* src1 = NULL;
+            char* src2 = NULL;
+            size_t size1 = 0, size2 = 0; 
+		    while (m_socket_handler->ReadMsg<HEADER>(header, &src1, size1, &src2, size2))
+		    {
+			    OnMessageArrived(header, src1, size1, src2, size2);
+                m_socket_handler->FetchReadBuffer(sizeof(HEADER) + header.m_len);
+			    //msg.clear();
+		    }
+        } while (status == ReadContinue);
 	}
 
 	virtual void OnWrite() override
@@ -77,7 +85,7 @@ private:
 	}
 
 	virtual void DoSocketClose() {}
-	virtual void OnMessageArrived(const HEADER& header, const std::string& msg) = 0;
+	virtual void OnMessageArrived(const HEADER& header, char* src1, size_t size1, char* src2, size_t size2) = 0;
 private:
 	SocketHandler* m_socket_handler;
 };

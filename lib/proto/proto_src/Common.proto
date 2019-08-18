@@ -7,3 +7,8 @@ message RegisterServer
 {
 	int32 type = 1;
 }
+
+message TestChat
+{
+    string content = 1;
+}

@@ -18,7 +18,7 @@ public:
 private:
 	virtual void DoSocketClose() override;
 
-	virtual void OnMessageArrived(const ClientHeader& header, const std::string& msg) override;
+	virtual void OnMessageArrived(const ClientHeader& header, char* src1, size_t size1, char* src2, size_t size2) override;
 };
 
 #endif

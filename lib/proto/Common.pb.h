@@ -41,7 +41,7 @@ struct TableStruct_Common_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[1]
+  static const ::google::protobuf::internal::ParseTable schema[2]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -52,10 +52,14 @@ namespace SSProto {
 class RegisterServer;
 class RegisterServerDefaultTypeInternal;
 extern RegisterServerDefaultTypeInternal _RegisterServer_default_instance_;
+class TestChat;
+class TestChatDefaultTypeInternal;
+extern TestChatDefaultTypeInternal _TestChat_default_instance_;
 }  // namespace SSProto
 namespace google {
 namespace protobuf {
 template<> ::SSProto::RegisterServer* Arena::CreateMaybeMessage<::SSProto::RegisterServer>(Arena*);
+template<> ::SSProto::TestChat* Arena::CreateMaybeMessage<::SSProto::TestChat>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace SSProto {
@@ -172,6 +176,126 @@ class RegisterServer final :
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Common_2eproto;
 };
+// -------------------------------------------------------------------
+
+class TestChat final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:SSProto.TestChat) */ {
+ public:
+  TestChat();
+  virtual ~TestChat();
+
+  TestChat(const TestChat& from);
+
+  inline TestChat& operator=(const TestChat& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  TestChat(TestChat&& from) noexcept
+    : TestChat() {
+    *this = ::std::move(from);
+  }
+
+  inline TestChat& operator=(TestChat&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const TestChat& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const TestChat* internal_default_instance() {
+    return reinterpret_cast<const TestChat*>(
+               &_TestChat_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    1;
+
+  void Swap(TestChat* other);
+  friend void swap(TestChat& a, TestChat& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TestChat* New() const final {
+    return CreateMaybeMessage<TestChat>(nullptr);
+  }
+
+  TestChat* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<TestChat>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const TestChat& from);
+  void MergeFrom(const TestChat& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(TestChat* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string content = 1;
+  void clear_content();
+  static const int kContentFieldNumber = 1;
+  const ::std::string& content() const;
+  void set_content(const ::std::string& value);
+  #if LANG_CXX11
+  void set_content(::std::string&& value);
+  #endif
+  void set_content(const char* value);
+  void set_content(const char* value, size_t size);
+  ::std::string* mutable_content();
+  ::std::string* release_content();
+  void set_allocated_content(::std::string* content);
+
+  // @@protoc_insertion_point(class_scope:SSProto.TestChat)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr content_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_Common_2eproto;
+};
 // ===================================================================
 
 
@@ -197,9 +321,68 @@ inline void RegisterServer::set_type(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:SSProto.RegisterServer.type)
 }
 
+// -------------------------------------------------------------------
+
+// TestChat
+
+// string content = 1;
+inline void TestChat::clear_content() {
+  content_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& TestChat::content() const {
+  // @@protoc_insertion_point(field_get:SSProto.TestChat.content)
+  return content_.GetNoArena();
+}
+inline void TestChat::set_content(const ::std::string& value) {
+  
+  content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SSProto.TestChat.content)
+}
+#if LANG_CXX11
+inline void TestChat::set_content(::std::string&& value) {
+  
+  content_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:SSProto.TestChat.content)
+}
+#endif
+inline void TestChat::set_content(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SSProto.TestChat.content)
+}
+inline void TestChat::set_content(const char* value, size_t size) {
+  
+  content_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SSProto.TestChat.content)
+}
+inline ::std::string* TestChat::mutable_content() {
+  
+  // @@protoc_insertion_point(field_mutable:SSProto.TestChat.content)
+  return content_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* TestChat::release_content() {
+  // @@protoc_insertion_point(field_release:SSProto.TestChat.content)
+  
+  return content_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void TestChat::set_allocated_content(::std::string* content) {
+  if (content != nullptr) {
+    
+  } else {
+    
+  }
+  content_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), content);
+  // @@protoc_insertion_point(field_set_allocated:SSProto.TestChat.content)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

@@ -25,7 +25,7 @@ void ClientConnection::SendServerMsg(int32_t cmd, const std::string& msg)
 	SendMsg((char*)&header, sizeof(ClientHeader));
 	SendMsg(msg);
 
-	LOG_INFO("ClientConnection::SendServerMsg cmd:%d size:%d send_msg:%s", header.m_cmd, header.m_len, msg.c_str());
+	LOG_INFO("ClientConnection::SendServerMsg cmd:%d size:%d send_len:%d send_msg:%s ", header.m_cmd, header.m_len, msg.length(), msg.c_str());
 }
 
 void ClientConnection::DoSocketClose()
@@ -33,9 +33,9 @@ void ClientConnection::DoSocketClose()
 	LOG_INFO("ClientConnection::DoSocketClose");
 }
 
-void ClientConnection::OnMessageArrived(const ClientHeader& header, const std::string& msg)
+void ClientConnection::OnMessageArrived(const ClientHeader& header, char* src1, size_t size1, char* src2, size_t size2)
 {
-	LOG_INFO("ClientConnection::OnMessageArrived cmd[%d] msg[%s]", header.m_cmd, msg.c_str());
+	LOG_INFO("ClientConnection::OnMessageArrived cmd[%d] size1[%d] size2[%d]", header.m_cmd, size1, size2);
 }
 
 //ClientConnection::ClientConnection(EventLoop* loop)

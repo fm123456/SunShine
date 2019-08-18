@@ -19,6 +19,7 @@ EpollData::EpollData(int32_t fd, EventLoop* loop)
 
 EpollData::~EpollData()
 {
+
 }
 
 void EpollData::HandleEvent(int32_t epoll_event)

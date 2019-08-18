@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 
 #include "StdCout.h"
 #include "ClientConnection.h"
@@ -6,6 +7,8 @@
 
 #include "common/Log.h"
 #include "net/Command.h"
+#include "proto/Common.pb.h"
+
 
 StdCout::StdCout(EventLoop* loop)
 	:BaseChannel(2, loop)
@@ -20,12 +23,24 @@ StdCout::~StdCout()
 
 void StdCout::OnChat(int32_t cmd)
 {
-	std::string msg;
+	//std::string msg;
 
-	std::cout << "input send msg:";
-	std::cin >> msg;
+	//std::cout << "input send msg:";
+	//std::cin >> msg;
+    
+    for (int i = 0; i < 30; i++)
+    {
+        char buff[1024] = { 0 };
+        size_t len = snprintf(buff, 1024, "Hello World %d", i);
 
-	ClientManager::instance().GetClientConn()->SendServerMsg(cmd, msg);
+        SSProto::TestChat tsChat;
+        tsChat.set_content(buff, len);
+
+        std::string msg;
+        tsChat.SerializeToString(&msg);
+        ClientManager::instance().GetClientConn()->SendServerMsg(cmd, msg);
+        sleep(1);
+    }
 }
 
 void StdCout::OnRead()

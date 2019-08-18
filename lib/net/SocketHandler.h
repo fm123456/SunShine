@@ -43,17 +43,18 @@ public:
 	}
 
 	template<class T>
-	bool ReadMsg(T& header, std::string& msg)
+	bool ReadMsg(T& header, char** src1, size_t& size1, char** src2, size_t& size2)
 	{
-		return m_read_buffer.ReadMsg<T>(header, msg);
+		return m_read_buffer.ReadMsg<T>(header, src1, size1, src2, size2);
 	}
 
-	size_t GetWriteBufferUsedSize() { return m_write_buffer.GetUsedSize(); }
+	size_t GetWriteBufferUsedSize() { return m_write_buffer.GetOccupySize(); }
+    void FetchReadBuffer(size_t sz) { m_read_buffer.FetchSize(sz); }
 private:
 	int32_t m_socket;
 
-	CycleQueueBuffer m_read_buffer;
-	CycleQueueBuffer m_write_buffer;
+	CycleQueueBuffer<32> m_read_buffer;
+	CycleQueueBuffer<32> m_write_buffer;
 };
 
 #endif
